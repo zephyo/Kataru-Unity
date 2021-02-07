@@ -10,7 +10,7 @@ public class MyKataru : Kataru
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(Application.dataPath + "/Kataru/story");
+        Debug.Log(Application.dataPath + "/Kataru/bookmark.yml");
         LoadStory(Application.dataPath + "/Kataru/story");
         LoadBookmark(Application.dataPath + "/Kataru/bookmark.yml");
         InitRunner();

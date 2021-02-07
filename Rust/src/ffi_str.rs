@@ -1,6 +1,7 @@
-use std::ffi::CStr;
+// use std::ffi::CStr;
 use std::fmt;
 use std::os::raw::c_char;
+use std::{slice, str};
 
 #[repr(C)]
 #[derive(Clone, Copy)]
@@ -17,8 +18,9 @@ impl FFIStr {
         }
     }
 
-    pub fn to_str(c_chars: *const c_char) -> &'static str {
-        unsafe { CStr::from_ptr(c_chars).to_str().unwrap() }
+    pub fn to_str(c_chars: *const c_char, length: usize) -> &'static str {
+        unsafe { &str::from_utf8_unchecked(slice::from_raw_parts(c_chars as *const u8, length)) }
+        // unsafe { CStr::from_ptr(c_chars).to_str().unwrap() }
     }
 
     pub fn result<T, E: fmt::Debug>(result: Result<T, E>) -> Self {

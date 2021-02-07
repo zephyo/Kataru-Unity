@@ -41,14 +41,20 @@ public class Kataru : MonoBehaviour
     }
 
     [DllImport("kataru_ffi")]
-    static extern FFIStr load_bookmark(byte[] path);
-    public void LoadBookmark(string path) =>
-        load_bookmark(Encoding.UTF8.GetBytes(path)).ThrowIfError();
+    static extern FFIStr load_bookmark(byte[] path, UIntPtr length);
+    public void LoadBookmark(string path)
+    {
+        var bytes = Encoding.UTF8.GetBytes(path);
+        load_bookmark(bytes, (UIntPtr)bytes.Length).ThrowIfError();
+    }
 
     [DllImport("kataru_ffi")]
-    static extern FFIStr load_story(byte[] path);
-    public static void LoadStory(string path) =>
-        load_story(Encoding.UTF8.GetBytes(path)).ThrowIfError();
+    static extern FFIStr load_story(byte[] path, UIntPtr length);
+    public static void LoadStory(string path)
+    {
+        var bytes = Encoding.UTF8.GetBytes(path);
+        load_story(bytes, (UIntPtr)bytes.Length).ThrowIfError();
+    }
 
 
     [DllImport("kataru_ffi")]
@@ -105,10 +111,11 @@ public class Kataru : MonoBehaviour
     static string GetValue(int i) => get_value((UIntPtr)i).ToString();
 
     [DllImport("kataru_ffi")]
-    static extern LineTag next(byte[] input);
+    static extern LineTag next(byte[] input, UIntPtr length);
     public void Next(string input)
     {
-        LineTag tag = next(Encoding.UTF8.GetBytes(input));
+        var bytes = Encoding.UTF8.GetBytes(input);
+        LineTag tag = next(bytes, (UIntPtr)bytes.Length);
         Debug.Log(String.Format("Tag: {0}", tag));
         switch (tag)
         {

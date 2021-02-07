@@ -23,8 +23,8 @@ fn try_load_bookmark(path: &str) -> Result<(), ParseError> {
     }
 }
 #[no_mangle]
-pub extern "C" fn load_bookmark(path: *const c_char) -> FFIStr {
-    let path = FFIStr::to_str(path);
+pub extern "C" fn load_bookmark(path: *const c_char, length: usize) -> FFIStr {
+    let path = FFIStr::to_str(path, length);
     FFIStr::result(try_load_bookmark(path))
 }
 
@@ -35,8 +35,8 @@ fn try_load_story(path: &str) -> Result<(), ParseError> {
     }
 }
 #[no_mangle]
-pub extern "C" fn load_story(path: *const c_char) -> FFIStr {
-    let path = FFIStr::to_str(path);
+pub extern "C" fn load_story(path: *const c_char, length: usize) -> FFIStr {
+    let path = FFIStr::to_str(path, length);
     FFIStr::result(try_load_story(path))
 }
 
@@ -60,8 +60,8 @@ pub extern "C" fn init_runner() -> FFIStr {
 }
 
 #[no_mangle]
-pub extern "C" fn next(input: *const c_char) -> LineTag {
-    let input = FFIStr::to_str(input);
+pub extern "C" fn next(input: *const c_char, length: usize) -> LineTag {
+    let input = FFIStr::to_str(input, length);
     unsafe {
         LINE = Some(RUNNER.as_mut().unwrap().next(input));
         LineTag::tag(&LINE)
