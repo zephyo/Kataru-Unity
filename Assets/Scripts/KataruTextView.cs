@@ -31,4 +31,12 @@ class KataruTextView : MonoBehaviour
             text.fontStyle = FontStyle.Normal;
         }
     }
+
+    void OnCommand(Kataru.Command command)
+    {
+        if (command.name == "clearScreen")
+        {
+            text.text = "";
+        }
+    }
 }

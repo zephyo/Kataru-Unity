@@ -14,6 +14,8 @@ public class KataruManager : MonoBehaviour
         runner.OnDialogue += OnDialogue;
         runner.OnCommand += OnCommand;
         runner.OnInputCommand += OnInputCommand;
+
+        runner.Next("");
     }
 
     void OnDisable()
@@ -47,6 +49,7 @@ public class KataruManager : MonoBehaviour
         {
             Debug.Log(parameter);
         }
+        runner.Next("");
     }
 
     void OnChoices(Kataru.Choices choices)

@@ -6,7 +6,7 @@ use std::os::raw::c_char;
 static mut STORY: Option<Story> = None;
 static mut BOOKMARK: Option<Bookmark> = None;
 static mut RUNNER: Option<Runner> = None;
-static mut LINE: Option<Line> = None;
+static mut LINE: Option<&Line> = None;
 
 // Return a pointer to vec of
 static mut CHOICES: Vec<FFIStr> = Vec::new();
@@ -42,6 +42,7 @@ fn try_init_runner() -> Result<(), ParseError> {
     unsafe {
         if let Some(bookmark) = BOOKMARK.as_mut() {
             if let Some(story) = &STORY.as_ref() {
+                bookmark.init_state(story);
                 RUNNER = Some(Runner::new(bookmark, story));
                 return Ok(());
             } else {
@@ -52,6 +53,7 @@ fn try_init_runner() -> Result<(), ParseError> {
         }
     }
 }
+
 #[no_mangle]
 pub extern "C" fn init_runner() -> FFIStr {
     FFIStr::result(try_init_runner())
