@@ -1,9 +1,13 @@
 line: 0
 passage: Start
-namespace: ""
+namespace: inv
 state:
   "":
     test: 0
     name: Player
   intro:
     var: 2
+  inv:
+    Fridge.visited: false
+    Computer.visited: false
+    Coffee.visited: false

@@ -1,7 +1,7 @@
 ---
 namespace: ""
 state:
-  name: ""
+  name: "Player"
 characters:
   Alice:
     description: Main character.
@@ -17,14 +17,11 @@ Start:
   - [clearScreen: {}]
 
   # A single text block can have many lines using `|`.
-  - |
-    Welcome to Kataru!
-    「カタル」へようこそ!
-    Kataru is a dialogue engine built completely on top of YAML with a focus on ease of implementation and simplicity of writing.
+  - Narrator: |
+      Welcome to Kataru!
+      「カタル」へようこそ!
 
-  # Get input from the user and store into variables.
-  # - input:
-  #     name: What's your name?
+  - Kataru is a dialogue engine built completely on top of YAML with a focus on ease of implementation and simplicity of writing.
 
   # If you want to ignore whitespace, use `>-`.
   - >-

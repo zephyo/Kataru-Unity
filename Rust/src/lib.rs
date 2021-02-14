@@ -1,9 +1,7 @@
 mod ffi_str;
-mod tagger;
 use ffi_str::FFIStr;
 use kataru::*;
 use std::os::raw::c_char;
-use tagger::LineTag;
 
 static mut STORY: Option<Story> = None;
 static mut BOOKMARK: Option<Bookmark> = None;

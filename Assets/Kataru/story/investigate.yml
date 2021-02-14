@@ -4,14 +4,12 @@ state:
   Fridge.visited: false
   Computer.visited: false
   Coffee.visited: false
-  Investigate.visisted: false
 
 ---
 Start:
   - [clearScreen: {}]
-  - This is another passage in the same namespace, defined in a different file!
-  - |
-    Here let's show how we can use state to have nodes that are explorable at most once.
+  - Narrator: This is another passage in the same namespace, defined in a different file!
+  - Here let's show how we can use state to have nodes that are explorable at most once.
   - goto: Investigate
 
 Investigate:
@@ -30,9 +28,7 @@ Coffee:
   - goto: Investigate
 
 Fridge:
-  - set:
-      Fridge.visited: true
-      Coffee.visited: true
+  - set: { Fridge.visited: true }
   - It's a fridge. There's some moldy cheese in there. Gross!
   - goto: Investigate
 
@@ -42,5 +38,5 @@ Computer:
   - goto: Investigate
 
 Done:
-  - ALl done exploring, eh? Let's go check out another example then.
+  - All done exploring, eh? Let's go check out another example then.
   - goto: train:Start
